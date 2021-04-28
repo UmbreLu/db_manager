@@ -19,13 +19,22 @@ class Main():
         self.error_log = None
         self.results = None
         self.master = self.get_master_table()
-        this_tables = self.get_my_tables()
-        for table in this_tables:
+        self.table_list = []
+        for table in self.get_my_tables():
             try:
                 exec('self.{} = table'.format(table.name))
+                self.table_list.append("{}".format(table.name))
             except:
-                exec('self.{} = table'.format(table.name + '_'))
+                exec('self.{}_ = table'.format(table.name))
+                self.table_list.append("{}_".format(table.name))
         
+    def __str__(self):
+        strg = 'Database overview'
+        for table_name in self.table_list:
+            strg += '\n{}: '.format(table_name) + ', '.join(eval('self.{}.columns'.format(table_name))) +'.'
+        return strg
+
+    
     def get_master_table(self):
         """
         Instatiate the standart sqlite master table for the Main object.
@@ -67,7 +76,6 @@ class Main():
                 rowid = False
         if rowid:
             table_info['columns'].insert(0, 'rowid')
-        print(table_info)
         return table_info
 
     def run(self):
@@ -207,7 +215,7 @@ class Table():
         self.name = name
         self.columns = columns
         self.priority = priority  # not necessarily is trully the unique - used as standart column if not specified
-    
+
     @property
     def user_columns(self):
         """
