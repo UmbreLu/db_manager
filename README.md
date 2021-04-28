@@ -11,7 +11,7 @@ multiple unnecessary database connections and become thread safe at the same tim
 
 **Usage:**
 First create a database "Main" instance with sqlite3 database file name:
-* *db = db_manager.Main('myappdatabase.db')*
+* *db = db_helper.Main('myappdatabase.db')*
 
 The module will then automatically setup itself according to the table scheme present in the file.
 To check the database layout just print the database instance:
