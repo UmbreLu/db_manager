@@ -1,4 +1,4 @@
-## Database Manager for SQLITE3
+## Database Helper for SQLITE3
 
 #### Features
 * Simplified and safe shortcuts for sqlite commands.
@@ -10,17 +10,17 @@ and also to queue all sql commands to run on a single database connection when p
 multiple unnecessary database connections and become thread safe at the same time.
 
 **Usage:**
-First create a database instance with the sqlite3 database file name:
+First create a database "Main" instance with sqlite3 database file name:
 * *db = db_manager.Main('myappdatabase.db')*
 
 The module will then automatically setup itself according to the table scheme present in the file.
 To check the database layout just print the database instance:
 * *print(db)*
 
-Add basic CRUD commands to the queue by calling simple "table" methods:
+Then add basic CRUD commands to the queue by calling simple "table" methods (those are very shallow examples of usage, check detailed instructions in the proper topic):
 * *db.some_table("data")* -- this will show the specified data to all entries on the table
 * *db.some_table("data1", "data2" att="entry")* -- this will show "data1" and "data2" of some specific entry on the table
-* *db.some_table.insert("data1", "data2", "data3", "data4")*  -- this will and a new entry to the table with the specified data
+* *db.some_table.insert("data1", "data2", "data3", "data4")*  -- this will add a new entry to the table with the specified data
 * *db.some_table.update("new_info", "entry", up_column="data")* -- this will update "entry" with "new_info" on the table
 
 After calling the CRUD methods, use method ".run()" to execute them all together:
